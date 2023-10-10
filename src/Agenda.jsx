@@ -9,11 +9,54 @@ const AgendaPage = () => {
   });
   const [agendaData, setAgendaData] = useState([]);
 
+  // Function to save data to localStorage
+  const saveToLocalStorage = (data) => {
+    localStorage.setItem("agendaData", JSON.stringify(data));
+  };
+
+  // Function to load data from localStorage
+  const loadFromLocalStorage = () => {
+    const savedData = localStorage.getItem("agendaData");
+    if (savedData) {
+      setAgendaData(JSON.parse(savedData));
+    }
+  };
+
+  useEffect(() => {
+    // Load data from localStorage when the component mounts
+    loadFromLocalStorage();
+  }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
       [name]: value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Create a new schedule item
+    const newScheduleItem = {
+      time: formData.time,
+      title: formData.title,
+      description: formData.description,
+    };
+
+    // Update the agendaData state with the new item
+    const updatedAgendaData = [...agendaData, newScheduleItem];
+    setAgendaData(updatedAgendaData);
+
+    // Save the updated data to localStorage
+    saveToLocalStorage(updatedAgendaData);
+
+    // Clear the form
+    setFormData({
+      time: "",
+      title: "",
+      description: "",
     });
   };
 
@@ -35,7 +78,7 @@ const AgendaPage = () => {
         )}
       </div>
       <h3>Schedule Something</h3>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label>
           Time:
           <input
