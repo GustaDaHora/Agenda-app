@@ -1,6 +1,12 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 
+require('update-electron-app')({
+  repo: 'https://github.com/GustaDaHora/Agenda-app',
+  updateInterval: '5 minutes',
+  logger: require('electron-log')
+})
+
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
   app.quit();
