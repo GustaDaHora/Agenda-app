@@ -9,12 +9,10 @@ const AgendaPage = () => {
   });
   const [agendaData, setAgendaData] = useState([]);
 
-  // Function to save data to localStorage
   const saveToLocalStorage = (data) => {
     localStorage.setItem("agendaData", JSON.stringify(data));
   };
 
-  // Function to load data from localStorage
   const loadFromLocalStorage = () => {
     const savedData = localStorage.getItem("agendaData");
     if (savedData) {
@@ -23,7 +21,6 @@ const AgendaPage = () => {
   };
 
   useEffect(() => {
-    // Load data from localStorage when the component mounts
     loadFromLocalStorage();
   }, []);
 
@@ -38,26 +35,30 @@ const AgendaPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Create a new schedule item
     const newScheduleItem = {
       time: formData.time,
       title: formData.title,
       description: formData.description,
     };
 
-    // Update the agendaData state with the new item
     const updatedAgendaData = [...agendaData, newScheduleItem];
     setAgendaData(updatedAgendaData);
 
-    // Save the updated data to localStorage
     saveToLocalStorage(updatedAgendaData);
 
-    // Clear the form
     setFormData({
       time: "",
       title: "",
       description: "",
     });
+  };
+
+  // Function to delete a schedule item by index
+  const deleteSchedule = (index) => {
+    const updatedAgendaData = [...agendaData];
+    updatedAgendaData.splice(index, 1);
+    setAgendaData(updatedAgendaData);
+    saveToLocalStorage(updatedAgendaData);
   };
 
   return (
@@ -66,12 +67,19 @@ const AgendaPage = () => {
       <div className="agenda-items">
         {Array.isArray(agendaData) && agendaData.length > 0 ? (
           agendaData.map((item, index) => (
-            <AgendaItem
-              key={index}
-              time={item.time}
-              title={item.title}
-              description={item.description}
-            />
+            <div key={index} className="agenda-item">
+              <button
+                onClick={() => deleteSchedule(index)}
+                className="delete-button"
+              >
+                Delete
+              </button>
+              <AgendaItem
+                time={item.time}
+                title={item.title}
+                description={item.description}
+              />
+            </div>
           ))
         ) : (
           <p>No agenda items found.</p>
