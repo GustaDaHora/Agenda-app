@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 import AgendaItem from "./AgendaItem";
+
+const Container = styled.div`
+  width: 100%;
+  height: 100vh;
+
+  background-color: red;
+`;
 
 const AgendaPage = () => {
   const [formData, setFormData] = useState({
@@ -62,7 +70,7 @@ const AgendaPage = () => {
   };
 
   return (
-    <div className="agenda-page">
+    <Container className="agenda-page">
       <h2>Agenda</h2>
       <div className="agenda-items">
         {Array.isArray(agendaData) && agendaData.length > 0 ? (
@@ -115,7 +123,7 @@ const AgendaPage = () => {
         </label>
         <button type="submit">Schedule</button>
       </form>
-    </div>
+    </Container>
   );
 };
 
