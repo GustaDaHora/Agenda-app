@@ -45,4 +45,17 @@ module.exports = {
       },
     },
   ],
+  publishers: [
+    {
+      name: '@electron-forge/publisher-github',
+      config: {
+        repository: {
+          owner: 'GustaDaHora',
+          name: 'Agenda-app'
+        },
+        prerelease: true,
+        authToken: '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'
+      }
+    }
+  ],
 };
