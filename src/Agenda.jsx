@@ -6,9 +6,37 @@ const Container = styled.div`
   width: 100%;
   height: 100vh;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 20% 80%;
+  grid-template-areas:
+    "header header"
+    "aside section"
+    "footer footer";
+
+  header {
+    grid-area: header;
+    background-color: #333;
+    color: white;
+    width: 100%;
+  }
+
+  aside {
+    grid-area: aside;
+    background-color: #eee;
+  }
+
+  section {
+    grid-area: section;
+    background-color: #333;
+  }
+
+  footer {
+    grid-area: footer;
+    width: 100%;
+    background-color: #333;
+    color: white;
+  }
 `;
 
 const AgendaPage = () => {
@@ -73,58 +101,68 @@ const AgendaPage = () => {
 
   return (
     <Container className="agenda-page">
-      <h2>Agenda</h2>
-      <div className="agenda-items">
-        {Array.isArray(agendaData) && agendaData.length > 0 ? (
-          agendaData.map((item, index) => (
-            <div key={index} className="agenda-item">
-              <button
-                onClick={() => deleteSchedule(index)}
-                className="delete-button"
-              >
-                Delete
-              </button>
-              <AgendaItem
-                time={item.time}
-                title={item.title}
-                description={item.description}
-              />
-            </div>
-          ))
-        ) : (
-          <p>No agenda items found.</p>
-        )}
-      </div>
-      <h3>Schedule Something</h3>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Time:
-          <input
-            type="date"
-            name="time"
-            value={formData.time}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Title:
-          <input
-            type="text"
-            name="title"
-            value={formData.title}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Description:
-          <textarea
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-          />
-        </label>
-        <button type="submit">Schedule</button>
-      </form>
+      <header>
+        {" "}
+        <h2>Agenda</h2>
+      </header>
+      <section>
+        {" "}
+        <div className="agenda-items">
+          {Array.isArray(agendaData) && agendaData.length > 0 ? (
+            agendaData.map((item, index) => (
+              <div key={index} className="agenda-item">
+                <button
+                  onClick={() => deleteSchedule(index)}
+                  className="delete-button"
+                >
+                  Delete
+                </button>
+                <AgendaItem
+                  time={item.time}
+                  title={item.title}
+                  description={item.description}
+                />
+              </div>
+            ))
+          ) : (
+            <p>No agenda items found.</p>
+          )}
+        </div>
+      </section>
+      <aside>
+        {" "}
+        <h3>Schedule Something</h3>
+        <form onSubmit={handleSubmit}>
+          <label>
+            Time:
+            <input
+              type="date"
+              name="time"
+              value={formData.time}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Title:
+            <input
+              type="text"
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Description:
+            <textarea
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+            />
+          </label>
+          <button type="submit">Schedule</button>
+        </form>
+      </aside>
+      <footer>Footer</footer>
     </Container>
   );
 };
