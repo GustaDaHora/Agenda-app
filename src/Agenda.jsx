@@ -6,7 +6,9 @@ const Container = styled.div`
   width: 100%;
   height: 100vh;
 
-  background-color: red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const AgendaPage = () => {
