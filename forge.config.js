@@ -54,7 +54,7 @@ module.exports = {
           name: 'Agenda-app'
         },
         prerelease: true,
-        authToken: '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'
+        authToken: process.env.GITHUB_AUTH_TOKEN
       }
     }
   ],
