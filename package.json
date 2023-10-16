@@ -1,7 +1,7 @@
 {
   "name": "agenda",
   "productName": "Agenda",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A very simplistic and minimalist agenda app made with electron and react",
   "main": ".vite/build/main.js",
   "scripts": {
@@ -15,6 +15,10 @@
   "author": {
     "name": "Gustavo",
     "email": "106494958+GustaDaHora@users.noreply.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GustaDaHora/Agenda-app"
   },
   "license": "MIT",
   "devDependencies": {
