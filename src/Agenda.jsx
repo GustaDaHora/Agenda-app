@@ -8,7 +8,7 @@ const Container = styled.div`
 
   display: grid;
   grid-template-rows: auto 1fr auto;
-  grid-template-columns: 20% 80%;
+  grid-template-columns: 25% 75%;
   grid-template-areas:
     "header header"
     "aside section"
@@ -24,11 +24,18 @@ const Container = styled.div`
   aside {
     grid-area: aside;
     background-color: #eee;
+    > form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
   }
 
   section {
     grid-area: section;
     background-color: #333;
+    padding: 0.5rem;
+    word-wrap: break-word;
   }
 
   footer {
