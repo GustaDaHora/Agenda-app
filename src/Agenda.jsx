@@ -24,6 +24,7 @@ const Container = styled.div`
   aside {
     grid-area: aside;
     background-color: #eee;
+    color: #333;
     > form {
       display: flex;
       flex-direction: column;
@@ -36,6 +37,7 @@ const Container = styled.div`
     background-color: #333;
     padding: 0.5rem;
     word-wrap: break-word;
+    overflow-y: auto;
   }
 
   footer {
