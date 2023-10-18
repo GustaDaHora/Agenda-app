@@ -3,41 +3,45 @@ import styled from "styled-components";
 import AgendaItem from "./AgendaItem";
 
 const Container = styled.div`
-  width: 100%;
   height: 100vh;
+
+  overflow: hidden;
 
   display: grid;
   grid-template-rows: auto 1fr auto;
-  grid-template-columns: 25% 75%;
   grid-template-areas:
-    "header header"
-    "aside section"
-    "footer footer";
+    "header"
+    "section"
+    "footer";
+
+  form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50, -50%);
+    margin: -25px 0 0 -25px;
+    background-color: blue;
+    display: flex;
+    flex-direction: column;
+  }
 
   header {
     grid-area: header;
     background-color: #333;
     color: white;
     width: 100%;
-  }
-
-  aside {
-    grid-area: aside;
-    background-color: #eee;
-    color: #333;
-    > form {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
+    display: flex;
+    gap: 2rem;
+    padding: 0 1rem;
   }
 
   section {
+    box-shadow: 0px 1px inset black;
+    width: 100%;
     grid-area: section;
     background-color: #333;
-    padding: 0.5rem;
+    padding: 1rem;
     word-wrap: break-word;
-    overflow-y: auto;
   }
 
   footer {
@@ -55,6 +59,7 @@ const AgendaPage = () => {
     description: "",
   });
   const [agendaData, setAgendaData] = useState([]);
+  const [showForm, setShowForm] = useState(false);
 
   const saveToLocalStorage = (data) => {
     localStorage.setItem("agendaData", JSON.stringify(data));
@@ -98,6 +103,7 @@ const AgendaPage = () => {
       title: "",
       description: "",
     });
+    toggleForm();
   };
 
   // Function to delete a schedule item by index
@@ -108,11 +114,16 @@ const AgendaPage = () => {
     saveToLocalStorage(updatedAgendaData);
   };
 
+  const toggleForm = () => {
+    setShowForm(!showForm);
+  };
+
   return (
     <Container className="agenda-page">
       <header>
         {" "}
         <h2>Agenda</h2>
+        <button onClick={toggleForm}>Nova Nota!</button>
       </header>
       <section>
         {" "}
@@ -138,9 +149,7 @@ const AgendaPage = () => {
           )}
         </div>
       </section>
-      <aside>
-        {" "}
-        <h3>Schedule Something</h3>
+      {showForm && (
         <form onSubmit={handleSubmit}>
           <label>
             Time:
@@ -170,7 +179,7 @@ const AgendaPage = () => {
           </label>
           <button type="submit">Schedule</button>
         </form>
-      </aside>
+      )}
       <footer>Footer</footer>
     </Container>
   );
