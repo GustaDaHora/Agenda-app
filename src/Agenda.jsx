@@ -3,52 +3,37 @@ import styled from "styled-components";
 import AgendaItem from "./AgendaItem";
 
 const Container = styled.div`
-  height: 100vh;
+  word-wrap: break-word;
+  color: #fff;
 
-  overflow: hidden;
-
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  grid-template-areas:
-    "header"
-    "section"
-    "footer";
+  header {
+    background-color: #333;
+    text-align: center;
+  }
 
   form {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50, -50%);
+    transform: translate(-50%, -50%);
     margin: -25px 0 0 -25px;
     background-color: blue;
     display: flex;
     flex-direction: column;
   }
 
-  header {
-    grid-area: header;
+  main {
+    padding: 2rem;
+    min-height: 73vh;
     background-color: #333;
-    color: white;
-    width: 100%;
-    display: flex;
-    gap: 2rem;
-    padding: 0 1rem;
-  }
-
-  section {
-    box-shadow: 0px 1px inset black;
-    width: 100%;
-    grid-area: section;
-    background-color: #333;
-    padding: 1rem;
-    word-wrap: break-word;
+    box-shadow: 0 2px 2px inset #0a0a0a;
   }
 
   footer {
-    grid-area: footer;
-    width: 100%;
     background-color: #333;
-    color: white;
+    box-shadow: 0 2px 2px inset #0a0a0a;
+    text-align: center;
+    padding: 10px;
   }
 `;
 
@@ -125,7 +110,7 @@ const AgendaPage = () => {
         <h2>Agenda</h2>
         <button onClick={toggleForm}>Nova Nota!</button>
       </header>
-      <section>
+      <main>
         {" "}
         <div className="agenda-items">
           {Array.isArray(agendaData) && agendaData.length > 0 ? (
@@ -145,10 +130,10 @@ const AgendaPage = () => {
               </div>
             ))
           ) : (
-            <p>No agenda items found.</p>
+            <p>Nenhuma nota ainda.</p>
           )}
         </div>
-      </section>
+      </main>
       {showForm && (
         <form onSubmit={handleSubmit}>
           <label>
@@ -180,7 +165,9 @@ const AgendaPage = () => {
           <button type="submit">Schedule</button>
         </form>
       )}
-      <footer>Footer</footer>
+      <footer>
+        <p>Todos os direitos reservados &copy; 2023 Gustavo da Hora</p>
+      </footer>
     </Container>
   );
 };
