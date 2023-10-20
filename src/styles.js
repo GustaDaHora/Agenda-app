@@ -14,6 +14,14 @@ const GlobalStyle = createGlobalStyle`
     padding: 1rem;
     font-size: 2rem;
   }
+
+  @media (max-width: 900px) {
+    h1, h2, h3 {
+      padding: .5rem;
+      font-size: 1.5rem;
+    }
+  }
+
 `;
 
 export default GlobalStyle;
