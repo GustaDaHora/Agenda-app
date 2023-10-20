@@ -9,22 +9,75 @@ const Container = styled.div`
   header {
     background-color: #333;
     text-align: center;
+
+    > button {
+      font-size: 1rem;
+      background-color: #fff;
+      color: #333;
+      padding: 1rem;
+      border-radius: 15px 15px 0 0;
+      border: 2px solid black;
+
+      &:hover {
+        opacity: 80%;
+        cursor: pointer;
+      }
+    }
   }
 
   form {
-    position: absolute;
-    top: 50%;
+    position: fixed;
+    top: 55%;
     left: 50%;
+    width: 23%;
     transform: translate(-50%, -50%);
-    margin: -25px 0 0 -25px;
-    background-color: blue;
     display: flex;
     flex-direction: column;
+    place-items: center;
+    font-size: 1.5rem;
+    padding: 2rem;
+    border-radius: 15px 15px 0 0;
+    border: 2px solid black;
+    > label {
+      display: flex;
+      flex-direction: column;
+      place-items: center;
+      padding: 0.5rem 2rem;
+      margin: 0 2rem;
+    }
+    > button {
+      font-size: 1rem;
+      background-color: #fff;
+      color: #333;
+      padding: 0.5rem 1rem;
+      margin: 1rem;
+      border-radius: 15px;
+      border: 2px solid black;
+
+      &:hover {
+        opacity: 80%;
+        cursor: pointer;
+      }
+    }
+    input {
+      padding: 0.5rem;
+      &:hover {
+        opacity: 80%;
+        cursor: pointer;
+      }
+    }
+    textarea {
+      padding: 0.5rem 1rem;
+      &:hover {
+        opacity: 80%;
+        cursor: pointer;
+      }
+    }
   }
 
   main {
     padding: 2rem;
-    min-height: 73vh;
+    min-height: 66.7vh;
     background-color: #333;
     box-shadow: 0 2px 2px inset #0a0a0a;
   }
@@ -34,6 +87,62 @@ const Container = styled.div`
     box-shadow: 0 2px 2px inset #0a0a0a;
     text-align: center;
     padding: 10px;
+  }
+
+  @media (max-width: 900px) {
+    header {
+      padding: 0;
+      > button {
+        font-size: 0.8rem;
+        padding: 0.5rem;
+        border-radius: 5px 5px 0 0;
+      }
+    }
+    form {
+      width: 40%;
+      font-size: 1.2rem;
+      padding: 0.5rem;
+      border-radius: 5px;
+      border: 2px solid black;
+      > label {
+        display: flex;
+        flex-direction: column;
+        place-items: center;
+        padding: 0 1rem;
+        margin: 0 1rem;
+      }
+      > button {
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+        margin: 0.5rem;
+        border-radius: 5px;
+        &:hover {
+          opacity: 80%;
+          cursor: pointer;
+        }
+      }
+      input {
+        padding: 0.5rem;
+        &:hover {
+          opacity: 80%;
+          cursor: pointer;
+        }
+      }
+      textarea {
+        padding: 0.5rem 1rem;
+        &:hover {
+          opacity: 80%;
+          cursor: pointer;
+        }
+      }
+    }
+    main {
+      min-height: 73.6vh;
+    }
+
+    footer {
+      padding: 5px;
+    }
   }
 `;
 
@@ -137,32 +246,35 @@ const AgendaPage = () => {
       {showForm && (
         <form onSubmit={handleSubmit}>
           <label>
-            Time:
+            Data:
             <input
               type="date"
               name="time"
               value={formData.time}
               onChange={handleChange}
+              required
             />
           </label>
           <label>
-            Title:
+            Título:
             <input
               type="text"
               name="title"
               value={formData.title}
               onChange={handleChange}
+              required
             />
           </label>
           <label>
-            Description:
+            Descrição:
             <textarea
               name="description"
               value={formData.description}
               onChange={handleChange}
+              rows={3}
             />
           </label>
-          <button type="submit">Schedule</button>
+          <button type="submit">Agendar</button>
         </form>
       )}
       <footer>
