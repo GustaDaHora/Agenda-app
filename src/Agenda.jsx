@@ -80,6 +80,26 @@ const Container = styled.div`
     min-height: 66.7vh;
     background-color: #333;
     box-shadow: 0 2px 2px inset #0a0a0a;
+
+    > div {
+      > div {
+        border-bottom: 3px dashed black;
+      }
+    }
+
+    .delete-button {
+      font-size: 1rem;
+      background-color: #fff;
+      color: #ce2d00;
+      padding: 0.5rem 0.8rem;
+      border-radius: 10px;
+      border: 2px solid black;
+      margin-bottom: 1rem;
+      &:hover {
+        opacity: 80%;
+        cursor: pointer;
+      }
+    }
   }
 
   footer {
@@ -200,12 +220,15 @@ const AgendaPage = () => {
     toggleForm();
   };
 
-  // Function to delete a schedule item by index
   const deleteSchedule = (index) => {
-    const updatedAgendaData = [...agendaData];
-    updatedAgendaData.splice(index, 1);
-    setAgendaData(updatedAgendaData);
-    saveToLocalStorage(updatedAgendaData);
+    if (confirm("Deseja deletar essa nota?")) {
+      const updatedAgendaData = [...agendaData];
+      updatedAgendaData.splice(index, 1);
+      setAgendaData(updatedAgendaData);
+      saveToLocalStorage(updatedAgendaData);
+    } else {
+      return;
+    }
   };
 
   const toggleForm = () => {
@@ -225,17 +248,17 @@ const AgendaPage = () => {
           {Array.isArray(agendaData) && agendaData.length > 0 ? (
             agendaData.map((item, index) => (
               <div key={index} className="agenda-item">
+                <AgendaItem
+                  time={item.time}
+                  title={item.title}
+                  description={item.description}
+                />
                 <button
                   onClick={() => deleteSchedule(index)}
                   className="delete-button"
                 >
                   Delete
                 </button>
-                <AgendaItem
-                  time={item.time}
-                  title={item.title}
-                  description={item.description}
-                />
               </div>
             ))
           ) : (
