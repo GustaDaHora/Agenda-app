@@ -174,6 +174,7 @@ const AgendaPage = () => {
   });
   const [agendaData, setAgendaData] = useState([]);
   const [showForm, setShowForm] = useState(false);
+  const [editIndex, setEditIndex] = useState(null);
 
   const saveToLocalStorage = (data) => {
     localStorage.setItem("agendaData", JSON.stringify(data));
@@ -207,9 +208,17 @@ const AgendaPage = () => {
       description: formData.description,
     };
 
-    const updatedAgendaData = [...agendaData, newScheduleItem];
-    setAgendaData(updatedAgendaData);
+    let updatedAgendaData;
+    if (editIndex !== null) {
+      // If editIndex is not null, it means we are editing an existing schedule
+      updatedAgendaData = [...agendaData];
+      updatedAgendaData[editIndex] = newScheduleItem;
+    } else {
+      // If editIndex is null, it means we are adding a new schedule
+      updatedAgendaData = [...agendaData, newScheduleItem];
+    }
 
+    setAgendaData(updatedAgendaData);
     saveToLocalStorage(updatedAgendaData);
 
     setFormData({
@@ -217,7 +226,20 @@ const AgendaPage = () => {
       title: "",
       description: "",
     });
+
+    setEditIndex(null);
     toggleForm();
+  };
+
+  const editSchedule = (index) => {
+    setEditIndex(index);
+    const selectedSchedule = agendaData[index];
+    setFormData({
+      time: selectedSchedule.time,
+      title: selectedSchedule.title,
+      description: selectedSchedule.description,
+    });
+    setShowForm(true);
   };
 
   const deleteSchedule = (index) => {
@@ -259,6 +281,7 @@ const AgendaPage = () => {
                 >
                   Delete
                 </button>
+                <button onClick={() => editSchedule(index)}>Edit</button>
               </div>
             ))
           ) : (
