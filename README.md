@@ -7,7 +7,6 @@ Este é um projeto feito para o meu portfólio, desenvolvido em um ambiente Wind
 - [Funcionalidades](#Funcionalidades)
 - [Início Rápido](#Início-Rápido)
 - [Pré-requisitos](#Pré-requisitos)
-- [Instalação](#Instalação)
 - [Reconhecimento](#Reconhecimento)
 
 ## Funcionalidades
