@@ -25,8 +25,24 @@ const Container = styled.div`
     }
   }
 
+  button {
+    font-size: 1rem;
+    background-color: #fff;
+    color: #333;
+    padding: 0.5rem 1rem;
+    margin: 1rem;
+    border-radius: 15px;
+    border: 2px solid black;
+
+    &:hover {
+      opacity: 80%;
+      cursor: pointer;
+    }
+  }
+
   form {
     position: fixed;
+    background-color: #0a0a0a;
     top: 55%;
     left: 50%;
     width: 23%;
@@ -44,20 +60,6 @@ const Container = styled.div`
       place-items: center;
       padding: 0.5rem 2rem;
       margin: 0 2rem;
-    }
-    > button {
-      font-size: 1rem;
-      background-color: #fff;
-      color: #333;
-      padding: 0.5rem 1rem;
-      margin: 1rem;
-      border-radius: 15px;
-      border: 2px solid black;
-
-      &:hover {
-        opacity: 80%;
-        cursor: pointer;
-      }
     }
     input {
       padding: 0.5rem;
@@ -279,7 +281,7 @@ const AgendaPage = () => {
                   onClick={() => deleteSchedule(index)}
                   className="delete-button"
                 >
-                  Delete
+                  Deletar
                 </button>
                 <button onClick={() => editSchedule(index)}>Edit</button>
               </div>
@@ -324,7 +326,7 @@ const AgendaPage = () => {
         </form>
       )}
       <footer>
-        <p>Todos os direitos reservados &copy; 2023 Gustavo da Hora</p>
+        <p>Feito por Gustavo da Hora &copy; 2023 </p>
       </footer>
     </Container>
   );
