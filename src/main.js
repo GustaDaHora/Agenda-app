@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, Menu, shell } = require('electron');
 const path = require('path');
 
 require('update-electron-app')()
@@ -53,3 +53,102 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
+const menuTemplate = [
+  {
+    label: 'Creditos',
+    submenu: [
+      {
+        label: 'Github',
+        click() {
+          shell.openExternal('https://github.com/GustaDaHora');
+        }
+      },
+      {
+        label: 'Repositório',
+        click() {
+          shell.openExternal('https://github.com/GustaDaHora/Agenda-app');
+        }
+      },
+      {
+        label: 'Linkedin',
+        click() {
+          shell.openExternal('https://www.linkedin.com/in/gustavo-dahora');
+        }
+      }
+    ]
+  },
+  {
+    label: 'Edit',
+    submenu: [
+      { role: 'undo' },
+      { role: 'redo' },
+      { type: 'separator' },
+      { role: 'cut' },
+      { role: 'copy' },
+      { role: 'paste' },
+      { role: 'delete' },
+      { type: 'separator' },
+      { role: 'selectAll' }
+    ]
+  },
+  {
+    label: 'View',
+    submenu: [
+      { role: 'reload' },
+      { role: 'forceReload' },
+      { role: 'toggleDevTools' },
+      { type: 'separator' },
+      { role: 'resetZoom' },
+      { role: 'zoomIn' },
+      { role: 'zoomOut' },
+      { type: 'separator' },
+      { role: 'togglefullscreen' }
+    ]
+  },
+  {
+    label: 'Window',
+    submenu: [
+      { role: 'minimize' },
+      { role: 'close' }
+    ]
+  }
+];
+
+const mainMenu = Menu.buildFromTemplate(menuTemplate);
+Menu.setApplicationMenu(mainMenu);
+
+if (process.env.NODE_ENV !== 'production') {
+  menuTemplate.push({
+    label: 'Dev',
+    submenu: [
+      {
+        label: 'Debug',
+        accelerator: process.platform === 'win32' ? "Ctrl+Shift+I" : 'Cmd+Alt+I',
+        click(item, focusedwindow) {
+          focusedwindow.toggleDevTools();
+        }
+      },
+      {
+        label: 'Fullscreen',
+        accelerator: 'F11',
+        click(item, focusedwindow) {
+          focusedwindow.setFullScreen(!focusedwindow.isFullScreen());
+        }
+      },
+      {
+        label: 'Reload',
+        accelerator: 'CmdOrCtrl+R',
+        click(item, focusedwindow) {
+          if (focusedwindow) focusedwindow.reload();
+        }
+      },
+      {
+        label: 'Force Reload',
+        accelerator: 'CmdOrCtrl+Shift+R',
+        click(item, focusedwindow) {
+          if (focusedwindow) focusedwindow.webContents.reloadIgnoringCache();
+        }
+      }
+    ]
+  });
+}
