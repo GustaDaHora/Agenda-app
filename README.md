@@ -4,14 +4,11 @@ Este é um projeto feito para o meu portfólio, desenvolvido em um ambiente Wind
 
 ## Conteúdo
 
-- [Funcionalidades](#features)
-- [Início Rápido](#getting-started)
-- [Pré-requisitos](#prerequisites)
-- [Instalação](#installation)
-- [Uso](#usage)
-- [Contribuições](#contributing)
-- [Licença](#license)
-- [Agradecimentos](#acknowledgements)
+- [Funcionalidades](#Funcionalidades)
+- [Início Rápido](#Início-Rápido)
+- [Pré-requisitos](#Pré-requisitos)
+- [Instalação](#Instalação)
+- [Reconhecimento](#Reconhecimento)
 
 ## Funcionalidades
 
